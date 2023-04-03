@@ -1,0 +1,70 @@
+import random
+
+colors = ['RED', 'GREEN', 'YELLOW', 'BLUE']
+win = 10
+
+
+def ludo():
+    red = 0
+    green = 0
+    blue = 0
+    yellow = 0
+    for i in colors:
+        roll = input(f"{i} press R to roll dice: ")
+        t = ['r', 'R']
+        if roll in t:
+            n = random.randint(1, 6)
+            print(n)
+            print(f"Jump {n} blocks!")
+            if i == 'RED':
+                red = red + n
+
+            if i == 'GREEN':
+                green = green + n
+            if i == 'BLUE':
+                blue = blue + n
+            else:
+                yellow = yellow + n
+        else:
+            print("Choose valid option")
+
+
+def choose_color():
+    chosen = []
+    for number in range(1, 4):
+        # will run for 3 players, 4th will be taken automatically
+        choose = input(f"Choose a color for player {number}: ")
+
+        if choose.upper() in colors:
+            if choose.upper() in chosen:
+                print(f"{choose} is Already chosen!")
+            else:
+                chosen.append(choose)
+                print("Great!")
+        else:
+            print("Enter valid color!")
+            main()
+
+
+def calc(i, n):
+    sum = 0
+    sum = sum + n
+    if sum >= win:
+        print(f"Player {i} won")
+        exit()
+
+
+def main():
+    start = input("Press enter to start or q to quit: ")
+
+    if start == '':
+        choose_color()
+        ludo()
+        main()
+    else:
+        print("Exiting!")
+        exit()
+
+
+main()
+
